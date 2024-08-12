@@ -1,15 +1,27 @@
 name: CI/CD workflow
 
-
-
 on:
   push:
-     branches:
-        -main
-   pull_request:
-      branches:
-       -main
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
+jobs:
+  pre-commit-scans:
+    runs-on: ubuntu-latest
 
-jobs:pre-commit-scans:
-runs-on:ubuntu:latest
+    steps: 
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+     
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Maven
+        run: |
+          java --version
